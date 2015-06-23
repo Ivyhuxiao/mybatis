@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qunar.huxiao.implement.StudentMapper">
+    <resultMap id="StudentResult" type="Student">
+        <id property="studId" column="Id" />
+        <result property="name" column="Name" />
+        <result property="sex" column="Sex" />
+        <result property="age" column="Age" />
+        <result property="address" column="Address" />
+        <result property="major" column="Major" />
+    </resultMap>
+    <select id="findAllStudents" resultMap="StudentResult">
+        SELECT * FROM STUDENTS
+    </select>
+    <select id="findStudentById" resultMap="StudentResult" parameterType="String">
+        SELECT * FROM STUDENTS
+          WHERE Id=#{studId};
+    </select>
+    <insert id="insertStudent" parameterType="Student">
+        INSERT INTO STUDENTS
+          VALUES(#{studId}, #{name}, #{sex}, #{age}, #{address}, #{major})
+    </insert>
+    <delete id="deleteStudent" parameterType="String">
+        DELETE FROM STUDENTS
+          WHERE Id = #{studId}
+    </delete>
+    <update id="modifyStudent" parameterType="String">
+        UPDATE STUDENTS SET Name=#{name}, Sex=#{sex}, Age=#{age}, Address=#{address}, Major=#{major} WHERE Id=#{studId}
+    </update>
+</mapper>
